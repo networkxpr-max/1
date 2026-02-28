@@ -37,12 +37,12 @@
   "apiBloks": "https://www.api.bloks.io",
   "ejecutarInmediatamente": false,
   "compraUtc": {
-    "hour": 23,
-    "minute": 59
+    "hour": 0,
+    "minute": 0
   },
   "envioUtc": {
     "hour": 0,
-    "minute": 10
+    "minute": 5
   },
   "esperaLlenadoMercadoMs": 3000,
   "maxReintentosMercado": 3,
@@ -58,7 +58,7 @@
     "LOAN_XMD": 0,
     "METAL_XMD": 8,
     "XMT_XMD": 17,
-    "PUSSY_XMD": 0
+    "PUSSY_XMD": 12
   },
   "propina": {
     "activa": false,
@@ -77,3 +77,4 @@
     }
   }
 }
+
