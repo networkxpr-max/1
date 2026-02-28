@@ -1,0 +1,79 @@
+{
+  "documentacion": {
+    "apiRaiz": "Dirección de la API del mercado (DEX). Normalmente no necesitas cambiarla.",
+    "endpointsRpc": "Lista de nodos RPC de Proton. El bot usa el primero para consultas de cadena.",
+    "apiBloks": "API usada para leer balances de la cuenta.",
+    "ejecutarInmediatamente": "Si es true, compra al iniciar el bot. Si es false, espera a la hora configurada.",
+    "compraUtc": "Hora diaria (UTC) en la que el bot intenta comprar.",
+    "envioUtc": "Hora diaria (UTC) en la que el bot envía lo comprado.",
+    "esperaLlenadoMercadoMs": "Tiempo de espera (en milisegundos) antes de revisar si una orden se llenó.",
+    "maxReintentosMercado": "Número máximo de intentos de compra por cada mercado.",
+    "asignacionesMercado": "Porcentaje de dinero para cada mercado. La suma total no puede pasar de 100%.",
+    "pussyReferenciaPrecio": "PUSSY se compra en mercado PUSSY_XMD. Para información externa se usa Bloks: https://www.api.bloks.io/proton/tokens/PUSSY-proton-xprpussydao, par de referencia PUSSY/XUSDC.",
+    "bloqueoCompraUltimosDias": "Cuántos días al final del mes NO quieres comprar cada mercado. Ejemplo: 8 = no compra en los últimos 8 días. 0 = compra todo el mes. Si un mercado se bloquea, su porcentaje se reparte en partes iguales entre los mercados que siguen activos.",
+    "reglasCompra": {
+      "general": "Reglas que definen cuándo comprar más si el precio cayó.",
+      "reglaCaidaProgresiva": {
+        "porcentajeActivacion": "Desde qué caída empieza a aumentar compra. Ejemplo: -5.",
+        "pasoPorcentaje": "Cada cuántos puntos de caída sube otro tramo. Ejemplo: 5.",
+        "multiplicadorPorPaso": "Cuánto aumenta por cada tramo. Ejemplo: 2.",
+        "aplicarEnUltimosDiasMes": "true = aplica también al final de mes; false = no aplica en el tramo final.",
+        "diasFinalMes": "Cuántos días finales del mes se consideran tramo final. Ejemplo: 10.",
+        "ejemplo": "Con activación -5, paso 5 y multiplicador 2: -5%=x2, -10%=x4, -15%=x6."
+      },
+      "reglaCaidaExtrema": {
+        "porcentajeActivacion": "Umbral de caída extrema. Ejemplo: -50.",
+        "ejemplo": "Si llega a -50% o menos, usa balance casi completo (reserva 1 XMD). Nota: PUSSY_XMD no usa esta regla extrema."
+      }
+    },
+    "precisionPorcentaje": "Para evaluar reglas de caída, el bot usa solo los primeros 2 decimales del porcentaje (sin redondear).",
+    "pussyCambioDiario": "Para PUSSY_XMD se usa change_24hr global de Bloks para medir subida/bajada diaria (referencia de precio por par PUSSY/XUSDC).",
+    "notaEnvio": "El bot solo envía los símbolos que realmente compró ese mismo día.",
+    "propina": "Opcional. Viene desactivada por defecto. Si la activas, apoyas el proyecto (gracias). La cuenta de propina es fija: 'propinas'.",
+    "notaPropina": "Si activa=true, de cada token enviado se manda primero el porcentaje a 'propinas' y luego el resto a TO_ACCOUNT. Puedes subir o bajar el porcentaje cuando quieras. Si activa=false, no envía propina."
+  },
+  "apiRaiz": "https://dex.api.mainnet.metalx.com/dex",
+  "endpointsRpc": ["https://rpc.api.mainnet.metalx.com"],
+  "apiBloks": "https://www.api.bloks.io",
+  "ejecutarInmediatamente": false,
+  "compraUtc": {
+    "hour": 23,
+    "minute": 59
+  },
+  "envioUtc": {
+    "hour": 0,
+    "minute": 10
+  },
+  "esperaLlenadoMercadoMs": 3000,
+  "maxReintentosMercado": 3,
+  "asignacionesMercado": {
+    "XPR_XMD": "71%",
+    "LOAN_XMD": "17%",
+    "METAL_XMD": "4%",
+    "XMT_XMD": "4%",
+    "PUSSY_XMD": "4%"
+  },
+  "bloqueoCompraUltimosDias": {
+    "XPR_XMD": 0,
+    "LOAN_XMD": 0,
+    "METAL_XMD": 8,
+    "XMT_XMD": 17,
+    "PUSSY_XMD": 0
+  },
+  "propina": {
+    "activa": false,
+    "porcentaje": "0.10%"
+  },
+  "reglasCompra": {
+    "reglaCaidaProgresiva": {
+      "porcentajeActivacion": -5,
+      "pasoPorcentaje": 5,
+      "multiplicadorPorPaso": 3,
+      "aplicarEnUltimosDiasMes": false,
+      "diasFinalMes": 8
+    },
+    "reglaCaidaExtrema": {
+      "porcentajeActivacion": -50
+    }
+  }
+}
